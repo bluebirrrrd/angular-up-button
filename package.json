@@ -1,0 +1,25 @@
+{
+  "name": "angular-up-button",
+  "version": "0.0.1",
+  "description": "Up button component in angular",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bluebirrrrd/angular-up-button.git"
+  },
+  "keywords": [
+    "angular",
+    "component",
+    "up",
+    "button"
+  ],
+  "author": "Anna Kurylo <anna.kurilo21@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bluebirrrrd/angular-up-button/issues"
+  },
+  "homepage": "https://github.com/bluebirrrrd/angular-up-button#readme"
+}
