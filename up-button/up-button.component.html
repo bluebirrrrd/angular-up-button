@@ -1,0 +1,57 @@
+<div id="comment-modal"
+     class="modal modal-fixed-footer white"
+     materialize="modal"
+     [materializeActions]="modalActions">
+  <div class="modal-content" *ngIf="comment">
+    <h5 class="teal-text log-author">{{comment.logAuthor.name }} {{comment.logAuthor.surname}}</h5>
+    <h6 class="teal-text darken-1 project">({{ comment.log.app.appName.replace('-', ' ') }})</h6>
+    made changes in translation for <span class="teal-text">{{ comment.log.translationKey }}</span>:
+    <h5 class="black-text m-t-sm">
+      {{translationTextStart}}<span class="teal white-text">{{highlightedTranslationText}}</span>{{translationTextEnd}}
+    </h5>
+    <div class="divider"></div>
+    <div class="p-sm">
+      <h6 class="teal-text comment-author">{{ comment.commentAuthor.name }} {{ comment.commentAuthor.surname }}</h6>
+      commented <b title="{{ comment.createdAt | date:'medium' }}">{{ comment.createdAt | ago }}</b>:
+      <div class="flow-text m-b-sm">
+        {{ comment.commentText }}
+      </div>
+      <div *ngIf="comment.answers.length" class="replies p-sm">
+        <span class="teal-text">
+          There
+          <span [ngPlural]="comment.answers.length">
+            <ng-template ngPluralCase="=1">is 1 reply</ng-template>
+            <ng-template ngPluralCase="other">are {{ comment.answers.length }} replies</ng-template>
+          </span>:
+        </span>
+        <div class="p-sm black-text white reply" *ngFor="let reply of comment.answers; let isLast = last"
+             [ngClass]="{ 'p-b-sm': !isLast }">
+          <div>User: <span class="teal-text">{{reply.userName}}</span></div>
+          <small>{{reply.createdAt | date:'medium' }}</small>
+          <div>{{reply.answer}}</div>
+          <div class="divider m-t-sm" *ngIf="!isLast"></div>
+        </div>
+      </div>
+      <div *ngIf="!comment.answers.length" class="replies p-sm">
+        <span class="teal-text">There are no replies to this comment yet.</span>
+      </div>
+      <div class="divider"></div>
+      <p class="m-t-xl teal-text">Leave a reply in the form below:</p>
+      <div class="input-container col s12" materialize>
+        <label for="new-reply" class="active">New reply</label>
+        <textarea id="new-reply" class="materialize-textarea"
+                  [(ngModel)]="replyText"></textarea>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer white">
+    <button class="btn-flat close-modal deep-orange white-text"
+       (click)="closeModal()">
+      Close</button>
+    <button class="modal-action btn-flat reply-btn left teal white-text"
+       [disabled]="!replyText"
+       (click)="postReply()">
+      Post Reply
+    </button>
+  </div>
+</div>
